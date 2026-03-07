@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chat Widget</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex items-center justify-center min-h-screen">
+
+  <!-- Floating Chat Button (Centered) -->
+  <div class="fixed inset-0 flex items-center justify-center z-50">
+    <button id="chatToggle" class="bg-purple-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-purple-700 transition flex items-center gap-2">
+      <i class="fa-solid fa-comment-dots"></i>
+      Chat With Us
+    </button>
+  </div>
+
+  <!-- Centered Chat Modal -->
+  <div id="chatBox" class="fixed inset-0 bg-black/30 flex items-center justify-center hidden z-50">
+    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-96 md:w-[500px] h-[550px] flex flex-col">
+
+      <!-- Header -->
+      <div class="bg-purple-600 dark:bg-purple-700 text-white p-4 flex justify-between items-center rounded-t-2xl relative">
+        <span class="font-semibold">Customer Support</span>
+        <button id="chatClose" class="absolute top-2 right-2 text-white hover:text-gray-200 text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Messages -->
+      <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 text-gray-900 dark:text-gray-100">
+        <div class="text-sm text-gray-500 dark:text-gray-400">Hello! How can we assist you today?</div>
+      </div>
+
+      <!-- Input -->
+      <div class="border-t border-gray-200 dark:border-gray-700 p-3 flex flex-col gap-2">
+        <input type="text" id="chatInput" placeholder="Type your message..." class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white">
+        
+        <div class="flex gap-2 items-center">
+          <input type="file" id="chatFile" class="text-sm text-gray-500 dark:text-gray-400">
+          <button id="sendChat" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition">
+            <i class="fa-solid fa-paper-plane"></i> Send
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const chatToggle = document.getElementById('chatToggle');
+    const chatBox = document.getElementById('chatBox');
+    const chatClose = document.getElementById('chatClose');
+    const sendChat = document.getElementById('sendChat');
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatFile = document.getElementById('chatFile');
+
+    // Open/close chat
+    chatToggle.addEventListener('click', () => chatBox.classList.remove('hidden'));
+    chatClose.addEventListener('click', () => chatBox.classList.add('hidden'));
+
+    // Add message
+    function createMessage(content, sender = 'user', file = null) {
+      const div = document.createElement('div');
+      const timestamp = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+      div.className = `p-2 rounded-lg text-sm break-words max-w-[75%] ${sender==='user'?'bg-purple-100 dark:bg-purple-700 text-purple-900 dark:text-white ml-auto':'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100'}`;
+      
+      if(file){
+        const filePreview = document.createElement('div');
+        if(file.type.startsWith('image/')){
+          const img = document.createElement('img');
+          img.src = URL.createObjectURL(file);
+          img.className='max-w-full rounded mt-1';
+          filePreview.appendChild(img);
+        } else if(file.type==='application/pdf'){
+          filePreview.innerHTML=`<a href="${URL.createObjectURL(file)}" target="_blank" class="underline text-blue-600">${file.name}</a>`;
+        } else {
+          filePreview.textContent=`[File: ${file.name}]`;
+        }
+        div.appendChild(document.createTextNode(content));
+        div.appendChild(filePreview);
+      } else {
+        div.textContent = content;
+      }
+
+      const timeSpan = document.createElement('div');
+      timeSpan.className='text-xs text-gray-400 dark:text-gray-300 mt-1 text-right';
+      timeSpan.textContent = timestamp;
+
+      div.appendChild(timeSpan);
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Send chat to serverless API
+    async function sendToChatGPT(message){
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message })
+        });
+        const data = await response.json();
+        createMessage(data.reply, 'staff');
+      } catch(err){
+        console.error(err);
+        createMessage('Error: Could not connect to ChatGPT API.', 'staff');
+      }
+    }
+
+    sendChat.addEventListener('click', () => {
+      const message = chatInput.value.trim();
+      const file = chatFile.files[0];
+      if(!message && !file) return;
+
+      createMessage(message || '', 'user', file);
+      if(message) sendToChatGPT(message);
+
+      chatInput.value = '';
+      chatFile.value = '';
+    });
+
+    chatInput.addEventListener('keypress',(e)=>{ if(e.key==='Enter') sendChat.click(); });
+  </script>
+</body>
+</html>
