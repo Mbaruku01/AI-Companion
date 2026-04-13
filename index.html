@@ -35,6 +35,12 @@
     <link rel="icon" type="image/png" sizes="16x16" href="pic/logo.png">
     <link rel="apple-touch-icon" sizes="180x180" href="pic/logo.png">
     <link rel="shortcut icon" href="pic/logo.png">
+
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -118,6 +124,23 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        /* Customizing Pannellum to match your dark theme */
+    .pnlm-container {
+        background: #020617 !important; /* Matches slate-950 */
+    }
+    .pnlm-load-box {
+        background-color: rgba(0, 0, 0, 0.7) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 1rem !important;
+    }
+    .pnlm-lbox-text {
+        color: #fff !important;
+        font-family: inherit;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: 10px;
+    }
     </style>
 </head>
 <body>
@@ -312,7 +335,98 @@
         </div>
     </div>
 </section>
+<section id="tours" class="page-view px-6 pt-32 hidden">
+    <div class="max-w-7xl mx-auto">
+        <div class="mb-12">
+            <h2 class="text-4xl md:text-6xl font-black mb-4">Space & <span class="text-gradient">Time</span></h2>
+            <p class="text-slate-400 max-w-2xl">360° Photospheres capturing the sacred geography of Tanzania.</p>
+        </div>
 
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            
+            <div class="glass-card rounded-3xl overflow-hidden border border-white/10 h-[400px] flex flex-col">
+                <div id="pano-1" class="flex-1 bg-slate-900"></div>
+                <div class="p-4 bg-black/60 border-t border-white/5">
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-mint">National Museum</p>
+                    <h4 class="text-sm font-bold">Inside NMT Computer Lab</h4>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-3xl overflow-hidden border border-white/10 h-[400px] flex flex-col">
+                <div id="pano-2" class="flex-1 bg-slate-900"></div>
+                <div class="p-4 bg-black/60 border-t border-white/5">
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-cerulean">Dar Es Salaam Region</p>
+                    <h4 class="text-sm font-bold">Infrastructure Survey</h4>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-3xl overflow-hidden border border-white/10 h-[400px] flex flex-col">
+                <div id="pano-3" class="flex-1 bg-slate-900"></div>
+                <div class="p-4 bg-black/60 border-t border-white/5">
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-orange-500">Arusha</p>
+                    <h4 class="text-sm font-bold">Insibo Family Home</h4>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="research" class="page-view px-6 pt-32 hidden">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl font-black mb-10">Historical <span class="text-gradient">Studies</span></h2>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="glass-card p-8 rounded-3xl border border-white/5 hover:border-cerulean/50 transition-colors group">
+                <div class="w-12 h-12 bg-cerulean/10 rounded-xl flex items-center justify-center mb-6 text-cerulean">
+                    <i data-lucide="file-text"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 group-hover:text-cerulean transition-colors">The Makonde Migration Patterns</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6">A comprehensive analysis of oral histories and movement across the Ruvuma river from the 18th century.</p>
+                <button class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-mint">
+                    Read Publication <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            </div>
+    </div>
+</section>
+
+<section id="profile" class="page-view px-6 pt-32 hidden">
+    <div class="max-w-6xl mx-auto">
+        <div class="glass-card p-8 rounded-[3rem] mb-12 flex flex-col md:flex-row items-center gap-8 border-white/5">
+            <div class="relative w-32 h-32 shrink-0">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Janeth" class="rounded-full bg-slate-900 border-2 border-mint p-1" alt="SCL">
+                <div class="absolute -bottom-1 -right-1 bg-mint p-1.5 rounded-full"><i data-lucide="check" class="w-4 h-4 text-black"></i></div>
+            </div>
+            <div class="text-center md:text-left">
+                <h2 class="text-3xl font-black tracking-tight">SCL HERITAGE SHOP</h2>
+                <p class="text-slate-400 uppercase text-[10px] tracking-[0.3em] font-bold">Official Artifacts & Media</p>
+            </div>
+            <div class="md:ml-auto flex gap-4">
+                <div class="text-center px-6 border-r border-white/10">
+                    <div class="text-2xl font-black">112+</div>
+                    <div class="text-[9px] text-slate-500 uppercase font-bold">Items</div>
+                </div>
+                <div class="text-center px-6">
+                    <div class="text-2xl font-black text-mint">4K</div>
+                    <div class="text-[9px] text-slate-500 uppercase font-bold">Assets</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <div class="group cursor-pointer">
+                <div class="aspect-square rounded-3xl overflow-hidden mb-4 bg-slate-900 border border-white/10 relative">
+                    <img src="pic/perfume_thumb.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform" alt="Scent">
+                    <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold">TZS 45,000</div>
+                </div>
+                <h4 class="font-bold text-sm uppercase">Syntha Scent No. 1</h4>
+                <p class="text-slate-500 text-xs">Cultural Essence Collection</p>
+            </div>
+        </div>
+    </div>
+</section>
     <section id="profile" class="page-view px-6 pt-32">
         <div class="max-w-2xl mx-auto glass-card p-12 rounded-[3rem] border-white/5 text-center">
             <div class="relative w-40 h-40 mx-auto mb-8 p-1 rounded-full bg-gradient-tr from-cerulean to-mint">
@@ -543,6 +657,68 @@
     }
 
     window.onload = initApp;
+</script>
+<script>
+    function switchTab(tabId) {
+    // Keep your existing logic: Remove active class from all
+    document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+    
+    // Add active class to target
+    const targetTab = document.getElementById(tabId);
+    if (targetTab) targetTab.classList.add('active');
+    
+    // Keep your existing navigation button logic
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active-tab');
+        if(btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(tabId)) {
+            btn.classList.add('active-tab');
+        }
+    });
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // --- NEW LOGIC FOR 360 VIEWS ---
+    if (tabId === 'tours') {
+        // Use a tiny delay to ensure the browser has rendered the section before Pannellum starts
+        setTimeout(() => {
+            init360Viewers();
+        }, 100);
+    }
+}
+
+// Separate helper function to keep your main script clean
+function init360Viewers() {
+    try {
+        // Only initialize if the container exists and hasn't been filled yet
+        if (document.getElementById('pano-1') && document.getElementById('pano-1').innerHTML === "") {
+            pannellum.viewer('pano-1', {
+                "type": "equirectangular",
+                "panorama": "pic/PXL_20260318_081056330.PHOTOSPHERE.jpg",
+                "autoLoad": true,
+                "autoRotate": -1.5,
+                "showControls": false
+            });
+
+            pannellum.viewer('pano-2', {
+                "type": "equirectangular",
+                "panorama": "pic/PXL_20260315_102811011.PHOTOSPHERE.jpg",
+                "autoLoad": true,
+                "autoRotate": 1.2,
+                "showControls": false
+            });
+
+            pannellum.viewer('pano-3', {
+                "type": "equirectangular",
+                "panorama": "pic/PXL_20260315_042428263.PHOTOSPHERE.jpg",
+                "autoLoad": true,
+                "autoRotate": -1.0,
+                "showControls": false
+            });
+        }
+    } catch (e) {
+        console.error("Pannellum initialization error:", e);
+    }
+}
 </script>
 </body>
 </html>
