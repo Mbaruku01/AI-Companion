@@ -532,68 +532,49 @@
     </div>
 </section>
 
-<section id="profile" class="page-view px-6 pt-32 hidden">
-    <div class="max-w-6xl mx-auto">
-        <div class="glass-card p-8 rounded-[3rem] mb-12 flex flex-col md:flex-row items-center gap-8 border-white/5">
-            <div class="relative w-32 h-32 shrink-0">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Janeth" class="rounded-full bg-slate-900 border-2 border-mint p-1" alt="SCL">
-                <div class="absolute -bottom-1 -right-1 bg-mint p-1.5 rounded-full"><i data-lucide="check" class="w-4 h-4 text-black"></i></div>
-            </div>
-            <div class="text-center md:text-left">
-                <h2 class="text-3xl font-black tracking-tight">SCL HERITAGE SHOP</h2>
-                <p class="text-slate-400 uppercase text-[10px] tracking-[0.3em] font-bold">Official Artifacts & Media</p>
-            </div>
-            <div class="md:ml-auto flex gap-4">
-                <div class="text-center px-6 border-r border-white/10">
-                    <div class="text-2xl font-black">112+</div>
-                    <div class="text-[9px] text-slate-500 uppercase font-bold">Items</div>
-                </div>
-                <div class="text-center px-6">
-                    <div class="text-2xl font-black text-mint">4K</div>
-                    <div class="text-[9px] text-slate-500 uppercase font-bold">Assets</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-            <div class="group cursor-pointer">
-                <div class="aspect-square rounded-3xl overflow-hidden mb-4 bg-slate-900 border border-white/10 relative">
-                    <img src="pic/perfume_thumb.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform" alt="Scent">
-                    <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold">TZS 45,000</div>
-                </div>
-                <h4 class="font-bold text-sm uppercase">Syntha Scent No. 1</h4>
-                <p class="text-slate-500 text-xs">Cultural Essence Collection</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="sponsors" class="py-20 px-6 border-t border-white/5 bg-slate-950/50">
-    <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-12">
-            <p class="text-[10px] font-bold text-mint uppercase tracking-[0.5em] mb-4">Strategic Partners</p>
-            <h2 class="text-3xl md:text-5xl font-black text-white">Supported By</h2>
-        </div>
-
-        <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24">
+<section id="shop" class="page-view px-6 pt-32 hidden bg-slate-950">
+    <div class="max-w-7xl mx-auto min-h-[60vh] flex items-center justify-center">
+        
+        <div class="relative w-full max-w-4xl p-12 md:p-20 rounded-[3rem] border border-white/10 bg-slate-900/80 backdrop-blur-2xl overflow-hidden text-center group shadow-2xl">
             
-            <div class="group flex flex-col items-center gap-4">
-                <img src="pic/out-logo.png" alt="Open University of Tanzania" class="h-16 md:h-20 object-contain transition-transform duration-500 group-hover:scale-110">
-                <p class="text-[9px] font-bold text-slate-400 group-hover:text-mint uppercase tracking-widest transition-colors">The Open University of Tanzania</p>
-            </div>
+            <div class="absolute -top-24 -left-24 w-80 h-80 bg-mint/20 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-80 h-80 bg-mint/10 rounded-full blur-[120px] pointer-events-none"></div>
 
-            <div class="group flex flex-col items-center gap-4">
-                <img src="pic/logo.png" alt="SCL" class="h-16 md:h-20 object-contain transition-transform duration-500 group-hover:scale-110">
-                <p class="text-[9px] font-bold text-slate-400 group-hover:text-mint uppercase tracking-widest transition-colors">SHIMULIMULI COMPANY LIMITED</p>
-            </div>
+            <div class="relative z-10">
+                <div class="inline-flex mb-8 p-8 rounded-full bg-slate-950 border border-mint/30 shadow-[0_0_20px_rgba(202,255,191,0.1)]">
+                    <i data-lucide="shopping-cart" class="w-10 h-10 text-mint"></i>
+                </div>
+                
+                <h2 class="text-4xl md:text-7xl font-black text-white mb-6 italic tracking-tighter uppercase leading-none">
+                    SCL <span class="text-mint">SHOP</span>
+                </h2>
+                
+                <p class="text-slate-200 text-sm md:text-lg max-w-xl mx-auto mb-12 leading-relaxed font-medium">
+                    Experience the SCL Archive through our curated selection of cultural tours, 
+                    bespoke artifact replicas, and exclusive media publications.
+                </p>
 
+                <div class="flex flex-col items-center gap-6">
+                    <a href="https://your-shop-link.com" target="_blank" 
+                       class="group relative inline-flex items-center gap-4 px-12 py-6 border border-mint/50 bg-transparent text-white rounded-2xl font-black uppercase tracking-widest text-sm transition-all duration-300 hover:scale-105 hover:bg-white hover:text-slate-950 hover:shadow-[0_0_50px_rgba(202,255,191,0.5)]">
+                        
+                        <span class="relative z-10">Click here to visit SCL SHOP</span>
+                        <i data-lucide="external-link" class="w-5 h-5 text-mint transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
+                        
+                    </a>
+                    
+                    <div class="flex flex-col gap-2">
+                        <span class="text-[10px] text-mint/80 font-bold uppercase tracking-[0.3em]">
+                            Official Commerce Portal
+                        </span>
+                        <span class="text-[9px] text-slate-400 uppercase tracking-widest">
+                            Secure Global Shipping & Local Bank Transfers Available
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="mt-16 max-w-3xl mx-auto text-center">
-            <p class="text-slate-400 text-sm leading-relaxed italic">
-                "Our mission to digitally preserve Tanzania's cultural heritage is made possible through the generous support of our institutional partners. Together, we are bridging the gap between tradition and technology."
-            </p>
-        </div>
     </div>
 </section>
 </main>
@@ -625,7 +606,7 @@
             <span class="text-[8px] md:text-[9px] font-bold uppercase tracking-wider">Studies</span>
         </button>
 
-        <button onclick="switchTab('profile')" class="nav-btn flex-1 flex flex-col items-center gap-1 text-slate-500 hover:text-white transition-all" data-target="profile">
+        <button onclick="switchTab('shop')" class="nav-btn flex-1 flex flex-col items-center gap-1 text-slate-500 hover:text-white transition-all" data-target="profile">
             <i data-lucide="shopping-bag" class="w-5 h-5 md:w-6 md:h-6"></i>
             <span class="text-[8px] md:text-[9px] font-bold uppercase tracking-wider">SHOP</span>
         </button>
@@ -870,6 +851,52 @@
             viewers[id].toggleFullscreen();
         }
     }
+</script>
+<script>
+/* --- MARKET CATEGORY FILTERING --- */
+function filterShop(category, event) {
+    // 1. Prevent page jump if used inside an anchor tag
+    if (event) event.preventDefault();
+
+    // 2. Identify all shop category containers
+    const categories = document.querySelectorAll('.shop-category');
+    
+    // 3. Hide all categories using the 'hidden' class
+    categories.forEach(cat => {
+        cat.classList.add('hidden');
+    });
+
+    // 4. Show the target category
+    const targetId = `shop-${category}`;
+    const targetSection = document.getElementById(targetId);
+    if (targetSection) {
+        targetSection.classList.remove('hidden');
+    }
+
+    // 5. Handle Button Styling (Visual Tabs)
+    const filterButtons = document.querySelectorAll('.shop-filter');
+    filterButtons.forEach(btn => {
+        // Reset to default inactive state
+        btn.classList.remove('border-mint', 'text-mint', 'active');
+        btn.classList.add('border-white/10', 'text-slate-400');
+    });
+
+    // 6. Highlight the clicked button
+    const activeBtn = event ? event.currentTarget : document.querySelector(`button[onclick*="'${category}'"]`);
+    if (activeBtn) {
+        activeBtn.classList.remove('border-white/10', 'text-slate-400');
+        activeBtn.classList.add('border-mint', 'text-mint', 'active');
+    }
+}
+
+/* --- INITIALIZATION --- */
+// Ensure that when the 'Shop' page is first opened, the 'Tours' category is visible
+document.addEventListener('DOMContentLoaded', () => {
+    // This ensures your Lucide icons (map-pin, shopping-cart) render correctly
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+});
 </script>
 </body>
 </html>
