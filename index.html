@@ -344,42 +344,50 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             
-            <div class="glass-card rounded-3xl overflow-hidden border border-white/10 h-[400px] flex flex-col">
+            <div class="glass-card rounded-3xl overflow-hidden border border-white/10 h-[400px] flex flex-col relative group">
                 <div id="pano-1" class="flex-1 bg-slate-900"></div>
+                <button onclick="togglePanoFull('pano-1')" class="absolute top-4 right-4 z-20 bg-black/50 backdrop-blur-md p-3 rounded-xl border border-white/10 text-white hover:bg-mint hover:text-slate-900 transition-all opacity-0 group-hover:opacity-100">
+                    <i data-lucide="maximize"></i>
+                </button>
                 <div class="p-4 bg-black/60 border-t border-white/5">
                     <p class="text-[10px] font-bold uppercase tracking-widest text-mint">National Museum</p>
-                    <h4 class="text-sm font-bold">Inside NMT Computer Lab</h4>
+                    <h4 class="text-sm font-bold text-white">Inside NMT Computer Lab</h4>
                 </div>
             </div>
 
-            <div class="glass-card rounded-3xl overflow-hidden border border-white/10 h-[400px] flex flex-col">
+            <div class="glass-card rounded-3xl overflow-hidden border border-white/10 h-[400px] flex flex-col relative group">
                 <div id="pano-2" class="flex-1 bg-slate-900"></div>
+                <button onclick="togglePanoFull('pano-2')" class="absolute top-4 right-4 z-20 bg-black/50 backdrop-blur-md p-3 rounded-xl border border-white/10 text-white hover:bg-mint hover:text-slate-900 transition-all opacity-0 group-hover:opacity-100">
+                    <i data-lucide="maximize"></i>
+                </button>
                 <div class="p-4 bg-black/60 border-t border-white/5">
                     <p class="text-[10px] font-bold uppercase tracking-widest text-cerulean">Dar Es Salaam Region</p>
-                    <h4 class="text-sm font-bold">Infrastructure Survey</h4>
+                    <h4 class="text-sm font-bold text-white">Infrastructure Survey</h4>
                 </div>
             </div>
 
-            <div class="glass-card rounded-3xl overflow-hidden border border-white/10 h-[400px] flex flex-col">
+            <div class="glass-card rounded-3xl overflow-hidden border border-white/10 h-[400px] flex flex-col relative group">
                 <div id="pano-3" class="flex-1 bg-slate-900"></div>
+                <button onclick="togglePanoFull('pano-3')" class="absolute top-4 right-4 z-20 bg-black/50 backdrop-blur-md p-3 rounded-xl border border-white/10 text-white hover:bg-mint hover:text-slate-900 transition-all opacity-0 group-hover:opacity-100">
+                    <i data-lucide="maximize"></i>
+                </button>
                 <div class="p-4 bg-black/60 border-t border-white/5">
                     <p class="text-[10px] font-bold uppercase tracking-widest text-orange-500">Arusha</p>
-                    <h4 class="text-sm font-bold">Insibo Family Home</h4>
+                    <h4 class="text-sm font-bold text-white">Insibo Family Home</h4>
                 </div>
             </div>
-
-            <a href="3D.html" class="btn-premium px-8 py-4 rounded-2xl flex items-center justify-center gap-3 text-base group max-w-xs mx-auto mt-8 decoration-none">
-    <div class="relative">
-        <i data-lucide="box" class="w-5 h-5 group-hover:rotate-12 transition-transform"></i>
-        <span class="absolute -top-1 -right-1 flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-mint opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-mint"></span>
-        </span>
-    </div>
-    <span class="font-bold uppercase tracking-widest">Explore 3D Artifact</span>
-</a>
-
         </div>
+
+        <a href="3D.html" class="btn-premium px-8 py-4 rounded-2xl flex items-center justify-center gap-3 text-base group max-w-xs mx-auto mt-8 decoration-none">
+            <div class="relative">
+                <i data-lucide="box" class="w-5 h-5 group-hover:rotate-12 transition-transform"></i>
+                <span class="absolute -top-1 -right-1 flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-mint opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-mint"></span>
+                </span>
+            </div>
+            <span class="font-bold uppercase tracking-widest">Explore 3D Tour</span>
+        </a>
     </div>
 </section>
 
@@ -670,66 +678,74 @@
     window.onload = initApp;
 </script>
 <script>
+    // 1. Create a global object to store the viewer instances
+    let viewers = {};
+
     function switchTab(tabId) {
-    // Keep your existing logic: Remove active class from all
-    document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
-    
-    // Add active class to target
-    const targetTab = document.getElementById(tabId);
-    if (targetTab) targetTab.classList.add('active');
-    
-    // Keep your existing navigation button logic
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.classList.remove('active-tab');
-        if(btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(tabId)) {
-            btn.classList.add('active-tab');
+        // Keep your existing logic
+        document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+        
+        const targetTab = document.getElementById(tabId);
+        if (targetTab) targetTab.classList.add('active');
+        
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.remove('active-tab');
+            if(btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(tabId)) {
+                btn.classList.add('active-tab');
+            }
+        });
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        if (tabId === 'tours') {
+            setTimeout(() => {
+                init360Viewers();
+            }, 100);
         }
-    });
-    
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    // --- NEW LOGIC FOR 360 VIEWS ---
-    if (tabId === 'tours') {
-        // Use a tiny delay to ensure the browser has rendered the section before Pannellum starts
-        setTimeout(() => {
-            init360Viewers();
-        }, 100);
     }
-}
 
-// Separate helper function to keep your main script clean
-function init360Viewers() {
-    try {
-        // Only initialize if the container exists and hasn't been filled yet
-        if (document.getElementById('pano-1') && document.getElementById('pano-1').innerHTML === "") {
-            pannellum.viewer('pano-1', {
-                "type": "equirectangular",
-                "panorama": "pic/PXL_20260318_081056330.PHOTOSPHERE.jpg",
-                "autoLoad": true,
-                "autoRotate": -1.5,
-                "showControls": false
-            });
+    function init360Viewers() {
+        try {
+            if (document.getElementById('pano-1') && document.getElementById('pano-1').innerHTML === "") {
+                // 2. Assign the viewers to the global object
+                viewers['pano-1'] = pannellum.viewer('pano-1', {
+                    "type": "equirectangular",
+                    "panorama": "pic/PXL_20260318_081056330.PHOTOSPHERE.jpg",
+                    "autoLoad": true,
+                    "autoRotate": -1.5,
+                    "showControls": false
+                });
 
-            pannellum.viewer('pano-2', {
-                "type": "equirectangular",
-                "panorama": "pic/PXL_20260315_102811011.PHOTOSPHERE.jpg",
-                "autoLoad": true,
-                "autoRotate": 1.2,
-                "showControls": false
-            });
+                viewers['pano-2'] = pannellum.viewer('pano-2', {
+                    "type": "equirectangular",
+                    "panorama": "pic/PXL_20260315_102811011.PHOTOSPHERE.jpg",
+                    "autoLoad": true,
+                    "autoRotate": 1.2,
+                    "showControls": false
+                });
 
-            pannellum.viewer('pano-3', {
-                "type": "equirectangular",
-                "panorama": "pic/PXL_20260315_042428263.PHOTOSPHERE.jpg",
-                "autoLoad": true,
-                "autoRotate": -1.0,
-                "showControls": false
-            });
+                viewers['pano-3'] = pannellum.viewer('pano-3', {
+                    "type": "equirectangular",
+                    "panorama": "pic/PXL_20260315_042428263.PHOTOSPHERE.jpg",
+                    "autoLoad": true,
+                    "autoRotate": -1.0,
+                    "showControls": false
+                });
+
+                // Re-run Lucide icons for the 'maximize' buttons
+                if(window.lucide) lucide.createIcons();
+            }
+        } catch (e) {
+            console.error("Pannellum initialization error:", e);
         }
-    } catch (e) {
-        console.error("Pannellum initialization error:", e);
     }
-}
+
+    // 3. New function to trigger full screen
+    function togglePanoFull(id) {
+        if (viewers[id]) {
+            viewers[id].toggleFullscreen();
+        }
+    }
 </script>
 </body>
 </html>
